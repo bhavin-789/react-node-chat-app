@@ -5,6 +5,7 @@ import cors from "cors";
 import connectDB from "./config/dbConnection";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/AuthRoutes";
+import contatRoutes from "./routes/ContactRoutes";
 const app = express();
 const port = process.env.PORT || 8001;
 
@@ -18,9 +19,12 @@ app.use(
     credentials: true,
   })
 );
+
+app.use("/uploads/profiles", express.static("uploads/profiles"));
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/contacts", contatRoutes);
 
 app.listen(port, () => {
   console.log(`⚙️ Server is running at http://localhost:${port}`);

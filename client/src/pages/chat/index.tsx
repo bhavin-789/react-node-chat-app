@@ -9,7 +9,7 @@ import ChatContainer from "./components/chat-container";
 const Chat = () => {
   const navigate = useNavigate();
 
-  const { userInfo } = useAppStore();
+  const { userInfo, selectedChatType } = useAppStore();
 
   useEffect(() => {
     if (!userInfo.profileSetup) {
@@ -19,11 +19,16 @@ const Chat = () => {
       navigate("/chat");
     }
   }, [userInfo, navigate]);
+
   return (
     <div className="flex h-[100vh] text-white overflow-hidden">
       <ContactsContainer />
-      {/* <EmptyChatContainer /> */}
-      {/* <ChatContainer /> */}
+
+      {selectedChatType === undefined ? (
+        <EmptyChatContainer />
+      ) : (
+        <ChatContainer />
+      )}
     </div>
   );
 };
